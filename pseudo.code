@@ -1,0 +1,65 @@
+//pseudocode implementation of general program flow
+//actual extention has to be chromium compatable so it will probably be js
+
+//get linkedin post from current screen(not sure to just do all or just 
+trigger when the user clicks into a specific post, If I do it for all, 
+ratelimits and credit usage could become an issue)
+def getPost(page):
+	post = parsePostFromPage(page)
+	return post
+
+//xml encode function(used to encode post into format compatable with our 
+system prompt
+def xmlEncode(type, text):
+	encodedMessage = ""
+	if(type == POST):
+		encodedMessage = "<post>" + text + "</post>"
+	elif(type == REQUEST):
+		encodedMessage = "<request>" + text + "</request>"
+	else:
+		//type is invalid therefore thow error of some description
+		encodedMessage = null
+	return encodedMessage
+
+//xml decode function, will be used to 'decode' the response so that the 
+summaried version can repalce the original post
+def xmlDecode(type, text):
+	decodedMessage = ""
+	if(type == POST):
+                decodedMessage = text.Remove("<post>") && text.Remove("</post>")
+        elif(type == REQUEST):
+                decodedMessage = text.Remove("<response>") && text.Remove("</response>")
+        else:
+                //type is invalid therefore thow error of some description
+                decodedMessage = null
+        return decoded
+
+//send post(encoded) to the LLM with the system prompt
+def summarisePost(encodedMessage):
+	//setup call to llm(probably load this from a config file to specify model provider, 
+	//where that may be a local llm or cloud hosted provider, ideally we will enforce openapi 
+	//compatable endpoints so that we can just treat everything the same and replace the actual 
+	//url/ip to send it to
+	prompt = systemPrompt + "\n" + encodedMessage
+	response = llm.call(url, model, prompt)
+	return xmlDecode(RESPONSE, response)
+
+ //replace post with summaried version on the actual linkedIn page 
+def replacePost(encodedMessage):
+	//find original post on page
+	//replace original post with encodedMessage
+	return
+
+def main():
+	//main program loop
+	global SYSTEMPROMPT = """
+				You are a summariser model, your task is to summarise posts 
+				from the LinkedIn platform, you will be provided posts in the format 
+				<post> text </post> and should respond in the format <response> summaried 
+				version of original post text </response> Respond only in the format 
+				described, do not provide any additional response or commentary. Ensure 
+				any mentions of company or people names are retained in the summary. 
+	"""
+	while True:
+		encodedMessage = xmlEncode(POST, getPost(page))
+		replacePost(summarisePost(encodedMessage))
