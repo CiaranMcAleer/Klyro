@@ -51,9 +51,3 @@ To add a new AI provider:
 - `content.js` - Main extension logic that runs on LinkedIn
 - `providers.js` - AI provider implementations
 - `styles.css` - Extension styling
-
-## Notes
-
-- The extension only works on individual LinkedIn post pages
-- Make sure you have valid API keys for cloud providers
-- For Ollama, ensure your local server is running and accessible
