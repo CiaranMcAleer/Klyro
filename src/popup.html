@@ -3,10 +3,80 @@
 <head>
   <meta charset="utf-8">
   <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-tertiary: #f3f6f8;
+      --text-primary: #2c3e50;
+      --text-secondary: #666;
+      --text-muted: #999;
+      --border-color: #ccc;
+      --border-light: #eee;
+      --button-primary: #0077b5;
+      --button-primary-hover: #005582;
+      --button-secondary: #28a745;
+      --input-bg: #ffffff;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #2d2d2d;
+      --bg-tertiary: #3a3a3a;
+      --text-primary: #ffffff;
+      --text-secondary: #cccccc;
+      --text-muted: #888;
+      --border-color: #555;
+      --border-light: #444;
+      --button-primary: #0077b5;
+      --button-primary-hover: #0099e6;
+      --button-secondary: #28a745;
+      --input-bg: #2d2d2d;
+      --shadow: rgba(0,0,0,0.3);
+    }
+
     body {
       width: 300px;
       padding: 20px;
       font-family: Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h3 {
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .theme-toggle {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg-tertiary);
+      transform: scale(1.1);
+    }
+
+    .theme-icon {
+      font-size: 16px;
+      transition: transform 0.3s ease;
     }
     
     .section {
@@ -17,28 +87,205 @@
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
+      color: var(--text-primary);
     }
     
     select, input {
       width: 100%;
       padding: 5px;
       margin-bottom: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      background-color: var(--input-bg);
+      color: var(--text-primary);
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: var(--button-primary);
+    }
+    
+    .searchable-dropdown {
+      position: relative;
+      width: 100%;
+    }
+    
+    .searchable-dropdown input {
+      width: 100%;
+      padding: 5px;
       border: 1px solid #ccc;
       border-radius: 3px;
+    }
+    
+    .dropdown-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-top: none;
+      border-radius: 0 0 3px 3px;
+      z-index: 1000;
+      display: none;
+      box-shadow: 0 4px 6px var(--shadow);
+    }
+    
+    .dropdown-option {
+      padding: 10px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-light);
+      transition: background-color 0.2s ease;
+    }
+    
+    .dropdown-option:hover {
+      background-color: var(--bg-secondary);
+    }
+    
+    .dropdown-option.selected {
+      background-color: var(--bg-tertiary);
+    }
+    
+    .model-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    
+    .model-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.9em;
+    }
+    
+    .model-modality {
+      font-size: 1.1em;
+    }
+    
+    .model-id {
+      font-size: 0.8em;
+      color: var(--text-muted);
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      margin-bottom: 4px;
+    }
+    
+    .model-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8em;
+      color: var(--text-secondary);
+    }
+    
+    .model-context {
+      color: var(--text-secondary);
+    }
+    
+    .model-pricing {
+      font-weight: 500;
+      color: var(--button-secondary);
+    }
+    
+    .model-pricing.free {
+      color: var(--button-primary);
+      font-weight: 600;
+    }
+    
+    /* Token slider styling */
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border-color);
+      outline: none;
+      padding: 0;
+      margin: 10px 0;
+      transition: background 0.3s ease;
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--button-primary);
+      cursor: pointer;
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 2px 4px var(--shadow);
+      transition: all 0.3s ease;
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--button-primary);
+      cursor: pointer;
+      border: 2px solid var(--bg-primary);
+      box-shadow: 0 2px 4px var(--shadow);
+    }
+    
+    #maxTokensValue {
+      font-weight: bold;
+      color: var(--button-primary);
+    }
+    
+    .token-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 5px;
+    }
+    
+    /* Disabled option styling */
+    select option:disabled {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Test connection button styling */
+    #testConnection {
+      background-color: var(--button-secondary);
+      margin-top: 10px;
+    }
+
+    #testConnection:hover {
+      background-color: #218838;
+    }
+
+    /* Small text styling */
+    small {
+      color: var(--text-secondary);
+    }
+    
+    .loading {
+      color: var(--text-secondary);
+      font-style: italic;
+      padding: 8px;
     }
     
     button {
       width: 100%;
       padding: 10px;
-      background-color: #0077b5;
+      background-color: var(--button-primary);
       color: white;
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     
     button:hover {
-      background-color: #005582;
+      background-color: var(--button-primary-hover);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
     
     .status {
@@ -54,22 +301,39 @@
     .error {
       color: red;
     }
+    
+    .warning {
+      color: orange;
+    }
+    
+    .info {
+      color: blue;
+    }
   </style>
 </head>
 <body>
-  <h3>LinkedIn Post Summarizer</h3>
+  <div class="header">
+    <h3>Klyro</h3>
+    <button id="themeToggle" class="theme-toggle" title="Toggle dark/light mode">
+      <span class="theme-icon">🌙</span>
+    </button>
+  </div>
   
   <div class="section">
     <label for="provider">AI Provider:</label>
     <select id="provider">
       <option value="openai">OpenAI</option>
       <option value="openrouter">OpenRouter</option>
-      <option value="ollama">Ollama</option>
+      <option value="ollama" disabled>Ollama (Coming Soon)</option>
     </select>
   </div>
   
   <div class="section">
     <label for="model">Model:</label>
+    <div class="searchable-dropdown" id="modelDropdown" style="display: none;">
+      <input type="text" id="modelSearch" placeholder="Search models... Try: 'free', 'claude', 'gpt', 'vision'">
+      <div class="dropdown-options" id="dropdownOptions"></div>
+    </div>
     <input type="text" id="model" placeholder="e.g., gpt-3.5-turbo">
   </div>
   
@@ -84,15 +348,31 @@
   </div>
   
   <div class="section">
+    <label for="maxTokens">Max Tokens: <span id="maxTokensValue">300</span></label>
+    <input type="range" id="maxTokens" min="50" max="2000" step="50" value="300">
+    <div class="token-info">
+      <small id="tokenHelp" style="color: #666; font-size: 11px;">Higher values allow longer responses but cost more</small>
+    </div>
+  </div>
+  
+  <div class="section">
+    <label for="temperature">Temperature:</label>
+    <input type="number" id="temperature" placeholder="0.3" min="0" max="1" step="0.1">
+    <small style="color: #666; font-size: 11px;">Lower values (0.1-0.3) for focused summaries, higher (0.5-0.8) for creative</small>
+  </div>
+  
+  <div class="section">
     <label>
       <input type="checkbox" id="autoSummarize"> Auto-summarize posts
     </label>
   </div>
   
   <button id="saveSettings">Save Settings</button>
+  <button id="testConnection">Test Connection</button>
   
   <div class="status" id="status"></div>
   
+  <script src="providers.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "linkedin-summarizer-extension",
+  "name": "klyro-extension",
   "version": "1.0.0",
   "description": "Chrome extension to summarize LinkedIn posts using AI",
   "scripts": {
