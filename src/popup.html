@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    
+    .section {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    
+    select, input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0077b5;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #005582;
+    }
+    
+    .status {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+    
+    .success {
+      color: green;
+    }
+    
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h3>LinkedIn Post Summarizer</h3>
+  
+  <div class="section">
+    <label for="provider">AI Provider:</label>
+    <select id="provider">
+      <option value="openai">OpenAI</option>
+      <option value="openrouter">OpenRouter</option>
+      <option value="ollama">Ollama</option>
+    </select>
+  </div>
+  
+  <div class="section">
+    <label for="model">Model:</label>
+    <input type="text" id="model" placeholder="e.g., gpt-3.5-turbo">
+  </div>
+  
+  <div class="section">
+    <label for="apiKey">API Key:</label>
+    <input type="password" id="apiKey" placeholder="Your API key">
+  </div>
+  
+  <div class="section">
+    <label for="ollamaUrl">Ollama URL (if using Ollama):</label>
+    <input type="text" id="ollamaUrl" placeholder="http://localhost:11434">
+  </div>
+  
+  <div class="section">
+    <label>
+      <input type="checkbox" id="autoSummarize"> Auto-summarize posts
+    </label>
+  </div>
+  
+  <button id="saveSettings">Save Settings</button>
+  
+  <div class="status" id="status"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

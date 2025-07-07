@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn Post Summarizer",
+  "version": "1.0.0",
+  "description": "Summarize LinkedIn posts using AI models",
+  
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  
+  "host_permissions": [
+    "https://www.linkedin.com/*"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/posts/*", "https://www.linkedin.com/feed/update/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "LinkedIn Post Summarizer"
+  },
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["providers.js"],
+      "matches": ["https://www.linkedin.com/*"]
+    }
+  ]
+}

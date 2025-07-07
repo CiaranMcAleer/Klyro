@@ -1,0 +1,51 @@
+/* LinkedIn Post Summarizer Styles */
+
+.lps-action-button {
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.lps-action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 119, 181, 0.3);
+}
+
+.lps-action-button:active {
+  transform: translateY(0);
+}
+
+.lps-action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.lps-summary {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lps-summarized {
+  position: relative;
+}
+
+.lps-original {
+  position: relative;
+}
+
+/* Ensure our elements don't interfere with LinkedIn's layout */
+.lps-action-button,
+.lps-summary {
+  z-index: 1;
+  position: relative;
+}

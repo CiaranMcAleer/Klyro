@@ -1,0 +1,17 @@
+{
+  "name": "linkedin-summarizer-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension to summarize LinkedIn posts using AI",
+  "scripts": {
+    "convert-icons": "node convert_icons_browser.js",
+    "install-deps": "npm install",
+    "setup": "npm install && npm run convert-icons"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "keywords": ["chrome-extension", "linkedin", "ai", "summarization"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {}
+}

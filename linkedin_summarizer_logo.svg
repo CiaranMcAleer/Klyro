@@ -1,0 +1,37 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <circle cx="64" cy="64" r="58" fill="url(#bgGradient)" />
+  
+  <!-- Abstract document/summary icon -->
+  <g transform="translate(64,64)">
+    <!-- Main document shape -->
+    <rect x="-25" y="-35" width="50" height="60" rx="4" fill="url(#iconGradient)" opacity="0.95"/>
+    
+    <!-- Summary lines (representing text being condensed) -->
+    <rect x="-20" y="-25" width="30" height="2" rx="1" fill="url(#bgGradient)" opacity="0.7"/>
+    <rect x="-20" y="-18" width="25" height="2" rx="1" fill="url(#bgGradient)" opacity="0.7"/>
+    <rect x="-20" y="-11" width="35" height="2" rx="1" fill="url(#bgGradient)" opacity="0.7"/>
+    
+    <!-- Arrow pointing down (summarizing/condensing) -->
+    <path d="M -8 -2 L 0 6 L 8 -2" stroke="url(#bgGradient)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    
+    <!-- Condensed summary representation -->
+    <rect x="-15" y="12" width="20" height="2" rx="1" fill="url(#bgGradient)" opacity="0.9"/>
+    <rect x="-15" y="18" width="25" height="2" rx="1" fill="url(#bgGradient)" opacity="0.9"/>
+  </g>
+  
+  <!-- Subtle outer glow -->
+  <circle cx="64" cy="64" r="58" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+</svg>
