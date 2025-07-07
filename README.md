@@ -1,5 +1,9 @@
 # Klyro - AI-Powered LinkedIn Post Summarizer
 
+<div align="center">
+  <img src="linkedin_summarizer_logo.svg" alt="Klyro Logo" width="200">
+</div>
+
 This Chrome extension allows you to summarize LinkedIn posts using various AI providers including OpenAI, OpenRouter, and Ollama(Coming Soon...).
 
 ## Installation
