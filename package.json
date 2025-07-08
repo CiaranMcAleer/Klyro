@@ -11,7 +11,7 @@
     "puppeteer": "^21.0.0"
   },
   "keywords": ["chrome-extension", "linkedin", "ai", "summarization"],
-  "author": "Your Name",
+  "author": "Ciaran McAleer",
   "license": "MIT",
   "devDependencies": {}
 }
