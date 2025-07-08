@@ -1,5 +1,3 @@
-
-
 // State management
 let currentSettings = null;
 let processedPosts = new Set();
@@ -38,7 +36,11 @@ function loadSettings() {
       model: 'gpt-3.5-turbo',
       apiKey: '',
       ollamaUrl: 'http://localhost:11434',
-      autoSummarize: false
+      autoSummarize: false,
+      maxTokens: 300,
+      temperature: 0.3,
+      theme: 'light',
+      systemPrompt: 'You are a summariser model, your task is to summarise posts from the LinkedIn platform, you will be provided posts in the format <post> text </post> and should respond in the format <response> summaried version of original post text </response> Respond only in the format described, do not provide any additional response or commentary. Ensure any mentions of company or people names are retained in the summary.'
     }, (result) => {
       resolve(result);
     });

@@ -7,7 +7,8 @@ const DEFAULT_SETTINGS = {
   autoSummarize: false,
   maxTokens: 300,
   temperature: 0.3,
-  theme: 'light'
+  theme: 'light',
+  systemPrompt: 'You are a summariser model, your task is to summarise posts from the LinkedIn platform, you will be provided posts in the format <post> text </post> and should respond in the format <response> summaried version of original post text </response> Respond only in the format described, do not provide any additional response or commentary. Ensure any mentions of company or people names are retained in the summary.'
 };
 
 // Global variables for OpenRouter models
@@ -108,6 +109,7 @@ function populateForm(settings) {
   document.getElementById('autoSummarize').checked = settings.autoSummarize;
   document.getElementById('maxTokens').value = settings.maxTokens;
   document.getElementById('temperature').value = settings.temperature;
+  document.getElementById('systemPrompt').value = settings.systemPrompt || DEFAULT_SETTINGS.systemPrompt;
   
   // Set the search input for OpenRouter models
   if (provider === 'openrouter' && settings.model) {
@@ -181,7 +183,8 @@ async function saveSettings() {
     autoSummarize: document.getElementById('autoSummarize').checked,
     maxTokens: parseInt(document.getElementById('maxTokens').value) || DEFAULT_SETTINGS.maxTokens,
     temperature: parseFloat(document.getElementById('temperature').value) || DEFAULT_SETTINGS.temperature,
-    theme: getCurrentTheme()
+    theme: getCurrentTheme(),
+    systemPrompt: document.getElementById('systemPrompt').value || DEFAULT_SETTINGS.systemPrompt
   };
   
   // Validate settings
