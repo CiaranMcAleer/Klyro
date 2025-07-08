@@ -5,7 +5,8 @@
   "scripts": {
     "convert-icons": "node convert_icons_browser.js",
     "install-deps": "npm install",
-    "setup": "npm install && npm run convert-icons"
+    "setup": "npm install && npm run convert-icons",
+    "test": "jest"
   },
   "dependencies": {
     "puppeteer": "^21.0.0"
@@ -13,5 +14,7 @@
   "keywords": ["chrome-extension", "linkedin", "ai", "summarization"],
   "author": "Ciaran McAleer",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
 }
