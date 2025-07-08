@@ -369,7 +369,13 @@
   
   <button id="saveSettings">Save Settings</button>
   <button id="testConnection">Test Connection</button>
-  
+  <button id="resetExtension" style="background-color: #dc3545; margin-top: 10px;">Reset Extension</button>
+  <div id="resetConfirm" style="display:none; margin-top:10px; background:var(--bg-tertiary); border:1px solid var(--border-color); padding:12px; border-radius:4px; color:var(--text-primary);">
+    <strong>Are you sure?</strong><br>
+    This will delete <b>all extension data</b> including API keys.<br>
+    <button id="confirmReset" style="background-color:#dc3545; margin-top:8px;">Yes, Reset</button>
+    <button id="cancelReset" style="background-color:#888; margin-top:8px;">Cancel</button>
+  </div>
   <div class="status" id="status"></div>
   
   <script src="providers.js"></script>

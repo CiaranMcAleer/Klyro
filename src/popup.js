@@ -49,6 +49,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Set up token slider
     setupTokenSlider();
+
+    // Set up reset extension button
+    const resetBtn = document.getElementById('resetExtension');
+    const resetConfirm = document.getElementById('resetConfirm');
+    const confirmReset = document.getElementById('confirmReset');
+    const cancelReset = document.getElementById('cancelReset');
+    if (resetBtn && resetConfirm && confirmReset && cancelReset) {
+      resetBtn.addEventListener('click', () => {
+        resetConfirm.style.display = 'block';
+        resetBtn.style.display = 'none';
+      });
+      cancelReset.addEventListener('click', () => {
+        resetConfirm.style.display = 'none';
+        resetBtn.style.display = 'block';
+      });
+      confirmReset.addEventListener('click', async () => {
+        await resetExtensionData();
+        resetConfirm.style.display = 'none';
+        resetBtn.style.display = 'block';
+        showStatus('Extension reset to defaults.', 'success');
+        // Optionally reload popup to reflect reset
+        setTimeout(() => window.location.reload(), 1200);
+      });
+    }
     
     // Apply saved theme
     applyTheme(settings.theme || 'light');
@@ -581,4 +605,15 @@ function applyTheme(theme) {
   if (themeToggle) {
     themeToggle.title = `Switch to ${theme === 'light' ? 'dark' : 'light'} mode`;
   }
+}
+//resetExtension by clears all extension data and restores defaults
+async function resetExtensionData() {
+  return new Promise((resolve) => {
+    chrome.storage.sync.clear(() => {
+      // Restore defaults
+      chrome.storage.sync.set(DEFAULT_SETTINGS, () => {
+        resolve();
+      });
+    });
+  });
 }
