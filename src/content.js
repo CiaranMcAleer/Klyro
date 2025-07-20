@@ -31,7 +31,7 @@ async function init() {
 
 function loadSettings() {
   return new Promise((resolve) => {
-    chrome.storage.sync.get({
+    chrome.storage.local.get({
       provider: 'openai',
       model: 'gpt-3.5-turbo',
       apiKey: '',

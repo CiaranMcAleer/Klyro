@@ -25,18 +25,18 @@ This Chrome extension allows you to summarize LinkedIn posts using various AI pr
 
 ## Usage
 
-1. Navigate to a LinkedIn post (individual post page, not the feed)
+1. Navigate to a LinkedIn post (either an individual post page, or on the feed)
 2. If auto-summarize is enabled, the post will be automatically summarized
 3. If manual mode, click the "Summarize" button that appears below the post
 4. Click "Show Original" to revert back to the original post content
 
 ## Features
 
-- **Multiple AI Providers**: Support for OpenAI, OpenRouter, and Ollama
+- **Multiple AI Providers**: Support for OpenA and OpenRouter (Ollama coming soon)
 - **Easy Configuration**: Simple popup interface for settings
 - **Manual/Auto Mode**: Choose between automatic summarization or manual triggering
 - **Reversible**: Easy toggle between summary and original content
-- **Privacy Focused**: Only activates on individual post pages
+- **Privacy Focused**: With manual mode you control what posts get sent to the model providers, only the content of the post gets sent
 - **Extensible**: Easy to add new AI providers
 
 ## Adding New Providers
@@ -48,11 +48,15 @@ To add a new AI provider:
 3. Add the provider option to the popup HTML
 4. Update the `createProvider` factory function
 
-## Files Structure
+## File Structure
 
-- `manifest.json` - Extension configuration
-- `popup.html/js` - Settings interface
-- `content.js` - Main extension logic that runs on LinkedIn
-- `providers.js` - AI provider implementations
-- `styles.css` - Extension styling
+- `manifest.json` – Extension configuration
+- `popup.html` / `popup.js` – Settings interface and logic
+- `content.js` – Main extension logic that runs on LinkedIn
+- `providers.js` – AI provider implementations
+- `styles.css` – Extension styling
+- `assets/` – Images and icons (e.g., `linkedin_summarizer_logo.svg`)
 
+## Security
+- The extension makes calls directly to the respective provider's api key that you provide(BYOK), the key is stored in chrome.storage.local which means malicious extensions in your browser could gain access.
+- There is zero input sanitisation/measures taken to prevent prompt injection from the post contents.

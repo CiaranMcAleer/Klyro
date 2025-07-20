@@ -4,7 +4,7 @@ class AIProvider {
     this.settings = settings;
   }
   
-  async summarize(postText) {
+  async summarize(postText) {  //TODO Sanitize postText to ensure it doesn't exceed lenth limits of model(shouldn't really be an issue)
     throw new Error('Summarize method must be implemented by provider');
   }
 }

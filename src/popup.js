@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadSettings() {
   return new Promise((resolve) => {
-    chrome.storage.sync.get(DEFAULT_SETTINGS, (result) => {
+    chrome.storage.local.get(DEFAULT_SETTINGS, (result) => {
       if (chrome.runtime.lastError) {
         console.error('Error loading settings:', chrome.runtime.lastError);
         resolve(DEFAULT_SETTINGS);
@@ -226,7 +226,7 @@ async function saveSettings() {
     }
   }
   
-  chrome.storage.sync.set(settings, () => {
+  chrome.storage.local.set(settings, () => {
     if (chrome.runtime.lastError) {
       console.error('Error saving settings:', chrome.runtime.lastError);
       showStatus('Error saving settings', 'error');
@@ -586,9 +586,9 @@ function toggleTheme() {
   applyTheme(newTheme);
   
   // Save theme preference
-  chrome.storage.sync.get(DEFAULT_SETTINGS, (settings) => {
+  chrome.storage.local.get(DEFAULT_SETTINGS, (settings) => {
     settings.theme = newTheme;
-    chrome.storage.sync.set(settings);
+    chrome.storage.local.set(settings);
   });
 }
 
@@ -612,9 +612,9 @@ function applyTheme(theme) {
 //resetExtension by clears all extension data and restores defaults
 async function resetExtensionData() {
   return new Promise((resolve) => {
-    chrome.storage.sync.clear(() => {
+    chrome.storage.local.clear(() => {
       // Restore defaults
-      chrome.storage.sync.set(DEFAULT_SETTINGS, () => {
+      chrome.storage.local.set(DEFAULT_SETTINGS, () => {
         resolve();
       });
     });
