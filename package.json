@@ -9,12 +9,19 @@
     "test": "jest"
   },
   "dependencies": {
+    "@xenova/transformers": "^2.17.2",
     "puppeteer": "^21.0.0"
   },
-  "keywords": ["chrome-extension", "linkedin", "ai", "summarization"],
+  "keywords": [
+    "chrome-extension",
+    "linkedin",
+    "ai",
+    "summarization"
+  ],
   "author": "Ciaran McAleer",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^29.0.0"
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^30.2.0"
   }
 }

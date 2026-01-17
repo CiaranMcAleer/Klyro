@@ -11,6 +11,7 @@ Object.defineProperty(global, 'chrome', {
     runtime: {
       lastError: null,
       onMessage: { addListener: jest.fn() },
+      getURL: jest.fn(() => 'chrome-extension://test'),
     },
     tabs: {
       query: jest.fn((query, cb) => cb([{ id: 1, url: 'https://linkedin.com/feed' }])),
