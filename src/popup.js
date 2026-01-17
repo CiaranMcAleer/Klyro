@@ -151,6 +151,13 @@ async function updateModelPlaceholder() {
         await loadOpenRouterModels();
       }
       break;
+    case 'transformers':
+      modelInput.placeholder = 'e.g., Xenova/distilbart-cnn-6-6, Xenova/bart-large-cnn';
+      modelInput.style.display = 'block';
+      modelDropdown.style.display = 'none';
+      apiKeyInput.style.display = 'none';
+      ollamaUrlInput.style.display = 'none';
+      break;
     default:
       // Fallback to OpenAI for any unhandled cases (like Ollama)
       modelInput.placeholder = 'e.g., gpt-3.5-turbo, gpt-4';
@@ -188,13 +195,13 @@ async function saveSettings() {
   };
   
   // Validate settings
-  if (!settings.model) {
+  if (!settings.model && settings.provider !== 'transformers') {
     showStatus('Please enter a model name', 'error');
     return;
   }
   
   if (settings.provider === 'ollama') {
-    showStatus('Ollama support is coming soon. Please select OpenAI or OpenRouter.', 'error');
+    showStatus('Ollama support is coming soon. Please select OpenAI, OpenRouter, or Transformers.js.', 'error');
     return;
   }
   
