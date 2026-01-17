@@ -488,3 +488,15 @@ function createProvider(settings) {
       throw new Error(`Unknown provider: ${settings.provider}`);
   }
 }
+
+// Export for Node.js (tests)
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    AIProvider,
+    OpenAIProvider,
+    OpenRouterProvider,
+    OllamaProvider,
+    TransformersProvider,
+    createProvider
+  };
+}
